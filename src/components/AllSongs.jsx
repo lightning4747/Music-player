@@ -1,9 +1,23 @@
 import { useMusic } from "../hooks/useMusic";
 
 export const AllSongs = () => {
-    const {allSongs} = useMusic();
-    
+    const {allSongs, handlePlaySong,currentTrackIndex} = useMusic();
+
     return <div className="all-songs">
         <h2>All songs {allSongs.length}</h2>
+        <div className="songs-grid">
+            {allSongs.map((Song,key) => (
+                <div key={key} className={`song-card ${currentTrackIndex === key ? "active":""}`} onClick={()=> handlePlaySong(Song,key) }>
+                    <div className="song-info">
+                        <h3 className="song-title">{Song.title}</h3>
+                        <p className="song-artist">{Song.artist}</p>
+                        <span className="song-duration">{Song.duration}</span>
+                    </div>
+                    <div className="play-button">
+                        {currentTrackIndex === key ? "⏸️": "▶️"} 
+                    </div>
+                </div>
+            ))}
+        </div>
     </div>
 }
