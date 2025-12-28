@@ -1,4 +1,5 @@
 import { createContext,useState } from "react";
+import { PlayList } from "../components/PlayList";
 
 export const MusicContext = createContext();
 
@@ -55,6 +56,7 @@ export const MusicProvider = ({children}) => {
         const [duration, setDuration] = useState(0)
         const [isPlaying, setIsplaying] = useState(false)
         const [volume, setVolume] = useState(0.7)
+        const [playlists,setPlaylists] = useState([])
     
         const handlePlaySong = (song,index) => {
             setCurrentTrack(song)
@@ -90,7 +92,35 @@ export const MusicProvider = ({children}) => {
     
         const play = () => setIsplaying(true);
         const pause = () => setIsplaying(false);
+
+        const createPlaylists = (name) => {
+            const newplayLists = {
+                id:Date.now(),
+                name,
+                songs :[],
+            };
+
+            console.log("music context",newplayLists);
+
+            setPlaylists((prev) => [...prev, newplayLists]);
+        }
     return <MusicContext.Provider value={
-        {allSongs, handlePlaySong, currentTrack,currentTrackIndex,formatTime,setCurrentTime,currentTime, duration,setDuration,nextTrack,prevTrack,play,pause,isPlaying,volume,setVolume}
+        {allSongs, 
+            handlePlaySong, 
+            currentTrack,
+            currentTrackIndex,
+            formatTime,
+            setCurrentTime,
+            currentTime,
+            duration,
+            setDuration,
+            nextTrack,
+            prevTrack,
+            play,pause,
+            isPlaying,
+            volume,
+            setVolume,
+            createPlaylists,
+            playlists}
     }>{children}</MusicContext.Provider>
 }

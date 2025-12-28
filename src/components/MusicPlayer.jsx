@@ -3,7 +3,21 @@ import { useMusic } from "../hooks/useMusic";
 
 export const MusicPlayer = () => {
 
-    const {currentTrack,formatTime,setCurrentTime,currentTime,duration,setDuration,nextTrack,prevTrack,play,pause,isPlaying,volume,setVolume} = useMusic();
+    const {currentTrack,
+        formatTime,
+        setCurrentTime,
+        currentTime,
+        duration,
+        setDuration,
+        nextTrack,
+        prevTrack,
+        play,
+        pause,
+        isPlaying,
+        volume,
+        setVolume} = useMusic();
+        console.log(useMusic());
+
     const audioRef = useRef(null);
 
 useEffect(() => {
@@ -49,9 +63,10 @@ useEffect(()=> {
 },[isPlaying])
 
 useEffect(()=> {
-    if(!audioRef.current) return;
+    const audio = audioRef.current;
+    if (!audio) return;
 
-    audioRef.current.volume = volume;
+    audio.volume = volume;
 
 },[volume]);
 
