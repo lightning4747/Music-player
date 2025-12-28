@@ -3,6 +3,7 @@ import { MusicPlayer } from "./components/MusicPlayer"
 import { AllSongs } from "./components/AllSongs"
 import { PlayList } from "./components/PlayList"
 import {MusicProvider} from './context/MusicContext'
+import { Navbar } from "./components/Navbar"
 
 function App() {
   
@@ -12,7 +13,7 @@ function App() {
     <BrowserRouter>
     <MusicProvider>
     <div className="app">
-      {/* <Navbar/> */}
+      <Navbar/>
       <main className="app-main">
         <div className="player-section">
           <MusicPlayer/>
