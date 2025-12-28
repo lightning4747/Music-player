@@ -1,4 +1,5 @@
 import { createContext,useState } from "react";
+import { PlayList } from "../components/PlayList";
 
 export const MusicContext = createContext();
 
@@ -88,7 +89,16 @@ export const MusicProvider = ({children}) => {
             })
             setIsplaying(false);
         }
-    
+
+       const addSongToPlaylist = (playlistId, song) => {
+        setPlaylists(prev =>
+            prev.map(playlist =>
+            playlist.id === playlistId
+            ? { ...playlist, songs: [...playlist.songs, song] }
+            : playlist
+        )
+    );
+};    
         const play = () => setIsplaying(true);
         const pause = () => setIsplaying(false);
 
@@ -103,10 +113,15 @@ export const MusicProvider = ({children}) => {
 
             setPlaylists((prev) => [...prev, newplayLists]);
         }
+
+        const deletePlaylist = (playlistId) => {
+            setPlaylists((prev) => prev.filter((playlist) => playlist.id !== playlistId));
+        }
     return <MusicContext.Provider value={
         {allSongs, 
             handlePlaySong, 
             currentTrack,
+            setCurrentTrack,
             currentTrackIndex,
             formatTime,
             setCurrentTime,
@@ -120,6 +135,8 @@ export const MusicProvider = ({children}) => {
             volume,
             setVolume,
             createPlaylists,
-            playlists}
+            playlists,
+            addSongToPlaylist,
+            deletePlaylist}
     }>{children}</MusicContext.Provider>
 }
