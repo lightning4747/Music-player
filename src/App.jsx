@@ -5,6 +5,7 @@ import { PlayList } from "./components/PlayList"
 import {MusicProvider} from './context/MusicContext'
 import { Navbar } from "./components/Navbar"
 
+
 function App() {
   
 
@@ -21,7 +22,7 @@ function App() {
         <div className="content-section">
           <Routes>
             <Route path="/" element={<AllSongs />}/>
-            <Route path="/playlists" element={<PlayList />}/>
+            <Route path="/player" element={<PlayList />}/>
           </Routes>
         </div>
       </main>
