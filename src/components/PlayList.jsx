@@ -1,4 +1,4 @@
-import { use, useState } from "react"
+import { useState } from "react"
 import { useMusic } from "../hooks/useMusic";
 
 export const PlayList = () => {
@@ -7,7 +7,7 @@ export const PlayList = () => {
     const [searchQuery,setSearchQuery] = useState("");
     const [showDropdown,setShowDropdown] = useState(false);
 
-    const {playlists, createPlaylists} = useMusic();
+    const {playlists, createPlaylists, allSongs} = useMusic();
 
     const handleCreatePlaylist = () => {
         if(newplayListName.trim()) {
@@ -15,6 +15,12 @@ export const PlayList = () => {
            setplayListName(""); 
         }
     }
+
+    const filteredSongs = allSongs.filter((song)=> {
+        const matches = song.title.toLowerCase().includes(searchQuery.toLowerCase() || 
+                        song.artist.toLowerCase().includes(searchQuery.toLowerCase()));
+
+    })
 
     return (
         <div className="playlists">
