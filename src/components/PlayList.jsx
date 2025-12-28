@@ -1,8 +1,11 @@
-import { useState } from "react"
+import { use, useState } from "react"
 import { useMusic } from "../hooks/useMusic";
 
 export const PlayList = () => {
     const [newplayListName,setplayListName] = useState("");
+    const [selectedPlaylist, setSelectedPlaylists] = useState(null);
+    const [searchQuery,setSearchQuery] = useState("");
+    const [showDropdown,setShowDropdown] = useState(false);
 
     const {playlists, createPlaylists} = useMusic();
 
@@ -44,10 +47,30 @@ export const PlayList = () => {
                         <button className="delete-playlist-btn">Delete</button>
                     </div>
                     </div>
-                </div>)))}
-                {/* Add song Search */}
-                
+                    {/* Add song Search */}
+                    <div className="add-song-section">
+                        <div className="search-container">
+                            <input type="text" placeholder="Search songs to add..." value={
+                                selectedPlaylist?.id === item.id ? searchQuery : ""
+                            } 
+                            onChange={(e) => {
+                                setSearchQuery(e.target.value);
+                                setSelectedPlaylists(item);
+                                setShowDropdown(e.target.value.length > 0);
+                            }}
+                            onFocus={(e)=> {
+                                setSelectedPlaylists(item);
+                                setShowDropdown(e.target.value.length > 0);
+                            }}
+                            className="song-search-input"
+                            />
+                        </div>
+                    </div>
+
+                </div>
+                ))
+            )}
             </div>
         </div>
-    )
-}
+    );
+};
