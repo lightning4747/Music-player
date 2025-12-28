@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router"
 import { MusicPlayer } from "./components/MusicPlayer"
 import { AllSongs } from "./components/AllSongs"
 import { PlayList } from "./components/PlayList"
+import {MusicProvider} from './context/MusicContext'
 
 function App() {
   
@@ -9,6 +10,7 @@ function App() {
   return (
     
     <BrowserRouter>
+    <MusicProvider>
     <div className="app">
       {/* <Navbar/> */}
       <main className="app-main">
@@ -23,6 +25,7 @@ function App() {
         </div>
       </main>
     </div>
+    </MusicProvider>
     </BrowserRouter>
   )
 }
