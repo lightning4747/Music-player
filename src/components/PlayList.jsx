@@ -64,6 +64,12 @@ export const PlayList = () => {
                             }}
                             className="song-search-input"
                             />
+                            {/* Dropdown  */}
+                            {selectedPlaylist?.id === item.id && showDropdown && (
+                                <div className="song-dropdown">
+                                    
+                                </div>
+                            )}
                         </div>
                     </div>
 
